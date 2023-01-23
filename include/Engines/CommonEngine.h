@@ -1,0 +1,4 @@
+#ifndef COMMONENGINE_H
+#define COMMONENGINE_H
+
+#endif // COMMONENGINE_H
