@@ -1,8 +1,9 @@
+#include <iostream>
 #include "Desk.h"
 
 int main(){
 
-  test();
+  std::cout << "Hello World\n";
 
   return 0;
 }
