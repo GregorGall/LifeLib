@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <list>
+
 #include "Cell.h"
 
 namespace Life {
@@ -22,6 +23,8 @@ namespace Life {
     const Cell& operator()(int row, int col) const;
 
     void resize(int rows, int cols);
+
+    std::list<Cell*> getNeighbours(Cell*);
 
     std::list<Cell*> getNeighbours(int row, int col);
 

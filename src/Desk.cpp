@@ -46,7 +46,14 @@ void Life::Desk::resize(int rows, int cols)
   m_cols = cols;
 }
 
-std::list<Life::Cell*> Life::Desk::getNeighbours(int row, int col){
+std::list<Life::Cell*> Life::Desk::getNeighbours(Cell* cell)
+{
+  int length = cell - data.get();
+  return getNeighbours(length / m_rows, length % m_rows);
+}
+
+std::list<Life::Cell*> Life::Desk::getNeighbours(int row, int col)
+{
 
   // Если центральная клетка на границе, то соседняя клетка у другого края
   int decRow = ( row == 0 ) ? m_rows : row - 1;

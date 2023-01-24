@@ -16,11 +16,19 @@ namespace Life {
 
     void increment(){ ++neighbours; };
 
-    void evolute() { neighbours == 3 || neighbours == 2 ? status = true : status = false; };
+    void evolute()
+    {
+      if( neighbours == 3 ){ status = true; }
+      if( neighbours > 3 ){ status = false; }
+      if( neighbours < 2 ){ status = false; }
+      neighbours = 0;
+    };
 
   private:
 
     bool status{ false };
+
+  public:
     int neighbours{ 0 };
 
   };
