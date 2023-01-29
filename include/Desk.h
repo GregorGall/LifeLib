@@ -14,7 +14,7 @@ namespace Life {
 
     Desk(const Desk& other);
 
-    ~Desk(){};
+    ~Desk(){}
 
     Desk& operator=(const Desk& other);
 

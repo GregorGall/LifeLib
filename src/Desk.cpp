@@ -49,7 +49,7 @@ void Life::Desk::resize(int rows, int cols)
 std::list<Life::Cell*> Life::Desk::getNeighbours(Cell* cell)
 {
   int length = cell - data.get();
-  return getNeighbours(length / m_rows, length % m_rows);
+  return getNeighbours(length / m_cols, length % m_cols);
 }
 
 std::list<Life::Cell*> Life::Desk::getNeighbours(int row, int col)

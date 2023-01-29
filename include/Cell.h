@@ -10,17 +10,17 @@ namespace Life {
 
     operator bool() const { return status; }
 
-    void kill(){ status = false; };
+    void kill(){ status = false; }
 
-    void renew(){ status = true; };
+    void renew(){ status = true; }
+
+    bool toggle(){ return status = !status; }
 
     void increment(){ ++neighbours; };
 
     void evolute()
     {
-      if( neighbours == 3 ){ status = true; }
-      if( neighbours > 3 ){ status = false; }
-      if( neighbours < 2 ){ status = false; }
+      if( neighbours != 2) { status = (neighbours == 3); }
       neighbours = 0;
     };
 
@@ -29,6 +29,7 @@ namespace Life {
     bool status{ false };
 
   public:
+
     int neighbours{ 0 };
 
   };
