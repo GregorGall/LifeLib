@@ -56,13 +56,13 @@ std::list<Life::Cell*> Life::Desk::getNeighbours(int row, int col)
 {
 
   // Если центральная клетка на границе, то соседняя клетка у другого края
-  int decRow = ( row == 0 ) ? m_rows : row - 1;
-  int decCol = ( col == 0 ) ? m_cols : col - 1;
+  int decRow = ( row == 0 ) ? m_rows - 1 : row - 1;
+  int decCol = ( col == 0 ) ? m_cols - 1 : col - 1;
 
-  int incRow = ( row == m_rows ) ? 0 : row + 1;
-  int incCol = ( col == m_cols ) ? 0 : col + 1;
+  int incRow = ( row == m_rows - 1 ) ? 0 : row + 1;
+  int incCol = ( col == m_cols - 1 ) ? 0 : col + 1;
 
-  std::list<Cell*> tmp{           // У клетки в матрице 8 соседей
+  std::list<Cell*> tmp {          // У клетки в матрице 8 соседей
     &operator()(decRow, decCol),  //
     &operator()(row   , decCol),  //  * * *
     &operator()(incRow, decCol),  //  * + *

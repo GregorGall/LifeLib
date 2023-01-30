@@ -1,8 +1,9 @@
 #pragma once
-#include<memory>
-#include<thread>
-#include<chrono>
-#include<functional>
+#include <memory>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <functional>
 
 #include "Desk.h"
 #include "Cell.h"
@@ -24,6 +25,10 @@ namespace Life {
 
   LifeModel(int rows, int cols);
 
+  const Desk& readData(){ return desk; }
+
+  std::chrono::milliseconds readDelay(){ return delay; }
+
   void run(std::function<void()> callBack = nullptr);
 
   void stop(){ proceed = false; }
@@ -32,17 +37,26 @@ namespace Life {
 
   void setEngine(EngineType type);
 
-  void setDelay(std::chrono::milliseconds input) { delay = input; }
+  void setDelay(std::chrono::milliseconds input);
 
   void resize(int rows, int cols);
 
   void clear();
 
-  const Desk& readData(){ return desk; }
+  template<class container>
+  void toggleGroup(container cellGroup )
+  {
+    std::lock_guard gaurd(dataMutex);
+    for(auto& cell: cellGroup) {
+      toggleCell(cell.first, cell.second);
+    }
+  }
 
   private:
 
   Desk desk;
+
+  std::mutex dataMutex;
 
   std::unique_ptr<LifeEngine> engine;
 

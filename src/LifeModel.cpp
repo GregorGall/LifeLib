@@ -8,6 +8,13 @@ Life::LifeModel::LifeModel(int rows, int cols): desk(rows, cols)
   setEngine(EngineType::common);
 }
 
+void Life::LifeModel::setDelay(std::chrono::milliseconds input)
+{
+  if(input.count() >= 0) {
+      delay = input;
+  }
+}
+
 void Life::LifeModel::toggleCell(int row, int col)
 {
   auto& cell = desk(row, col);
@@ -34,9 +41,10 @@ void Life::LifeModel::setEngine(EngineType type)
 void Life::LifeModel::run(std::function<void()> callBack)
 {
   while(proceed) {
+    std::this_thread::sleep_for(delay);
+    std::lock_guard gaurd(dataMutex);
     engine->process();
     if(callBack){ callBack(); }
-    std::this_thread::sleep_for(delay);
   }
 
   proceed = true;

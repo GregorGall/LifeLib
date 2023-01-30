@@ -7,7 +7,6 @@ auto Life::CommonEngine::calculate() -> CellSet
   for(auto cell: aliveCells) {
 
     auto neighbourList = desk.getNeighbours(cell);
-
     for(auto& neighbour: neighbourList){
       neighbour->increment();
       cellsToEvolute.insert(neighbour);
@@ -22,8 +21,8 @@ auto Life::CommonEngine::calculate() -> CellSet
 void Life::CommonEngine::evolute(CellSet cellSet)
 {
   aliveCells.clear();
-  for(auto cell: cellSet){
+  for(auto cell: cellSet) {
     cell->evolute();
-    if(*cell){ aliveCells.insert(cell); }
+    if(*cell) { aliveCells.insert(cell); }
   }
 }
