@@ -10,6 +10,7 @@
 #include "LifeEngine.h"
 #include "Engines/CommonEngine.h"
 #include "Engines/OpenMPEngine.h"
+#include "Engines/ThreadEngine/ThreadEngine.h"
 
 namespace Life {
 

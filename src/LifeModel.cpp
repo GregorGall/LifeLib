@@ -26,7 +26,7 @@ void Life::LifeModel::setEngine(EngineType type)
       engine = std::make_unique<CommonEngine>(desk);
       break;
     case EngineType::thread:
-//      engine = std::make_unique<ThreadEngine>(desk);
+      engine = std::make_unique<ThreadEngine>(desk);
       break;
     case EngineType::openmp:
       engine = std::make_unique<OpenMPEngine>(desk);
