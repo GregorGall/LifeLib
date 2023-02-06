@@ -1,4 +1,5 @@
 #pragma once
+#include <atomic>
 
 namespace Life {
 
@@ -6,7 +7,7 @@ namespace Life {
 
   public:
 
-    Cell(){};
+    Cell(){}
 
     operator bool() const { return status; }
 
@@ -16,13 +17,13 @@ namespace Life {
 
     bool toggle(){ return status = !status; }
 
-    void increment(){ ++neighbours; };
+    void increment() { ++neighbours; }
 
     void evolute()
     {
       if( neighbours != 2) { status = (neighbours == 3); }
       neighbours = 0;
-    };
+    }
 
   private:
 
@@ -30,7 +31,7 @@ namespace Life {
 
   public:
 
-    int neighbours{ 0 };
+    std::atomic_int neighbours{ 0 };
 
   };
 
