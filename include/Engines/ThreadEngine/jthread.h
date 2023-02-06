@@ -20,8 +20,14 @@ namespace Life {
         if(someThread.joinable()){ someThread.join(); }
       }
 
+      jthread(jthread&& other)
+      {
+        someThread = std::move(other.someThread);
+      }
+
       jthread& operator=(jthread&& other)
       {
+        if ( someThread.joinable() ) { someThread.join(); }
         someThread = std::move(other.someThread);
         return *this;
       }

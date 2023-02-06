@@ -2,10 +2,9 @@
 
 void Life::ThreadEngine::process()
 {
-  auto pull = std::make_unique<jthread[]>(threadNum);
   int blockNum = desk.size() / threadNum;
   for(int i = 0; i < threadNum; ++i) {
-    int initPoint = i*blockNum;
+    int initPoint = i * blockNum;
     int endPoint = initPoint + blockNum;
     pull[i] = jthread(&ThreadEngine::partProcess, std::ref(*this), initPoint, endPoint);
   }

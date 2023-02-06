@@ -15,7 +15,8 @@ namespace Life {
 
     ThreadEngine(Desk& desk): LifeEngine(desk)
     {
-        threadNum = desk.size() > 1000 ? std::thread::hardware_concurrency()/2 : 1;
+        if( desk.size() > 1000 ) { threadNum = std::thread::hardware_concurrency()/2; }
+        pull = std::make_unique<jthread[]>(threadNum);
         syncPoint.reset(threadNum);
     }
 
@@ -25,6 +26,7 @@ namespace Life {
 
     int threadNum{ 1 };
     barrier syncPoint;
+    std::unique_ptr<jthread[]> pull;
 
   private:
 
