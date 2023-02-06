@@ -1,4 +1,6 @@
-# Сборка исполняемого файла тестов
-add_executable(MainTest mainTest.cpp)
-target_link_libraries(MainTest LifeModel)
-target_include_directories(MainTest PUBLIC ${CMAKE_SOURCE_DIR}/include)
+# Сборка основных тестов
+aux_source_directory(testMVC/src MVC)
+add_executable(main mainTest.cpp ${MVC})
+
+target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIRECTORY}/include testMVC/include)
+target_link_libraries(main PUBLIC LifeModel)
