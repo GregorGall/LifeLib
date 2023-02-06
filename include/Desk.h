@@ -18,6 +18,8 @@ namespace Life {
 
     Desk& operator=(const Desk& other);
 
+    Cell& operator[](int index){ return data[index]; }
+
     Cell& operator()(int row, int col);
 
     const Cell& operator()(int row, int col) const;

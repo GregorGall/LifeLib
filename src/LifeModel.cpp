@@ -1,5 +1,3 @@
-#pragma once
-
 #include "LifeModel.h"
 
 
@@ -17,19 +15,21 @@ void Life::LifeModel::setDelay(std::chrono::milliseconds input)
 
 void Life::LifeModel::toggleCell(int row, int col)
 {
-  auto& cell = desk(row, col);
-  cell.toggle() ? engine->add(&cell) : engine->remove(&cell);
+  engine->toggleCell(row, col);
 }
 
 void Life::LifeModel::setEngine(EngineType type)
 {
+  std::lock_guard gaurd(dataMutex);
   switch (type) {
     case EngineType::common:
       engine = std::make_unique<CommonEngine>(desk);
       break;
     case EngineType::thread:
+//      engine = std::make_unique<ThreadEngine>(desk);
       break;
     case EngineType::openmp:
+//      engine = std::make_unique<OpenMPEngine>(desk);
       break;
     case EngineType::cuda:
       break;

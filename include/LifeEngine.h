@@ -1,5 +1,4 @@
 #pragma once
-#include <unordered_set>
 
 #include "Desk.h"
 #include "Cell.h"
@@ -10,27 +9,17 @@ namespace Life {
 
   public:
 
-    LifeEngine(Desk& desk): desk{ desk }{};
+    LifeEngine(Desk& desk): desk{ desk }
+    {
+    }
 
-    void process(){ evolute(calculate()); }
+    virtual void process() = 0;
 
-    void add(Cell* cell){ aliveCells.insert(cell); }
-
-    void remove(Cell* cell){ aliveCells.erase(cell); };
+    virtual void toggleCell(int row, int col) { desk(row, col).toggle(); }
 
   protected:
-
-    using CellSet = std::unordered_set<Cell*>;
 
     Desk& desk;
-    CellSet aliveCells;
-
-  protected:
-
-    virtual CellSet calculate() = 0;
-
-    virtual void evolute(CellSet cellSet) = 0;
-
 
   };
 

@@ -1,13 +1,24 @@
 #include <Engines/CommonEngine.h>
 
+Life::CommonEngine::CommonEngine(Desk& desk): LifeEngine(desk)
+{
+  for(int i = 0; i < desk.size(); ++i) {
+    if(desk[i]){ aliveCells.insert(&desk[i]); }
+  }
+}
+
+void Life::CommonEngine::toggleCell(int row, int col)
+{
+  auto& cell = desk(row, col);
+  cell.toggle() ? add(&cell) : remove(&cell);
+}
+
 auto Life::CommonEngine::calculate() -> CellSet
 {
   CellSet cellsToEvolute;
 
   for(auto cell: aliveCells) {
-
-    auto neighbourList = desk.getNeighbours(cell);
-    for(auto& neighbour: neighbourList){
+    for(auto& neighbour: desk.getNeighbours(cell)) {
       neighbour->increment();
       cellsToEvolute.insert(neighbour);
     }
@@ -23,6 +34,6 @@ void Life::CommonEngine::evolute(CellSet cellSet)
   aliveCells.clear();
   for(auto cell: cellSet) {
     cell->evolute();
-    if(*cell) { aliveCells.insert(cell); }
+    if(*cell) { add(cell); }
   }
 }
