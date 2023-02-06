@@ -9,6 +9,7 @@
 #include "Cell.h"
 #include "LifeEngine.h"
 #include "Engines/CommonEngine.h"
+#include "Engines/OpenMPEngine.h"
 
 namespace Life {
 
