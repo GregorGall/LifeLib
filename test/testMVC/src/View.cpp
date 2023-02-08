@@ -16,7 +16,8 @@ void View::redraw()
 
 void View::toggleLife()
 {
-    std::swap(lifeState[0], lifeState[1]); redraw();
+    std::swap(lifeState[0], lifeState[1]);
+    redraw();
 }
 
 void View::printCols()

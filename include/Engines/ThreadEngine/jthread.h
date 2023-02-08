@@ -32,6 +32,10 @@ namespace Life {
         return *this;
       }
 
+      void join() { someThread.join(); }
+
+      bool joinable() { return someThread.joinable(); }
+
   private:
 
       std::thread someThread;

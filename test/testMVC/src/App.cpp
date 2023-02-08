@@ -13,7 +13,7 @@ void App::createSwarm(int rowNum, int colNum)
 
 int App::exec()
 {
-    createSwarm(1,1);
+    createSwarm(2,3);
     ctrl.launch();
     return 0;
 }
