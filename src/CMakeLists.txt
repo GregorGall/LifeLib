@@ -1,8 +1,10 @@
-# Сборка статической библиотеки
-aux_source_directory(Engines Engines)
-aux_source_directory(. Main)
+# Включение модуля управления условной компиляцией
+include(${CMAKE_SOURCE_DIR}/CMake/AddEngine.cmake)
 
-add_library(LifeModel ${Main} ${Engines})
-target_include_directories(LifeModel PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(LifeModel PRIVATE "${OpenMP_CXX_FLAGS}")
-target_compile_options(LifeModel PRIVATE "${OpenMP_CXX_FLAGS}")
+# Сборка статической библиотеки
+aux_source_directory(. Model)
+add_library(LifeModel ${Model} Engines/CommonEngine.cpp)
+
+target_include_directories(LifeModel PRIVATE ${CMAKE_SOURCE_DIR}/include)
+AddOpenMP(LifeModel)
+AddThread(LifeModel)

@@ -10,7 +10,6 @@ void App::createSwarm(int rowNum, int colNum)
   }
 }
 
-
 int App::exec()
 {
     createSwarm(2,3);
