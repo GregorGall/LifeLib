@@ -35,6 +35,11 @@ namespace Life {
 
     virtual void toggleCell(int row, int col) { desk(row, col).toggle(); }
 
+    // хорошо бы так
+    //virtual void toggleCell(int row, int col, bool) { desk(row, col).toggle(bool); }
+
+    void toggleCell(int i) { toggleCell( i/desk.cols(), i%desk.cols() ); }
+
   protected:
 
     Desk& desk;

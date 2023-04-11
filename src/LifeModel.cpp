@@ -13,6 +13,14 @@ void Life::LifeModel::setDelay(std::chrono::milliseconds input)
   }
 }
 
+void Life::LifeModel::clear()
+{
+  std::lock_guard gaurd(dataMutex);
+  for(int i = 0; i < desk.size(); ++i) {
+    if(desk[i]) { engine->toggleCell(i); }
+  }
+}
+
 void Life::LifeModel::toggleCell(int row, int col)
 {
   engine->toggleCell(row, col);
