@@ -6,12 +6,12 @@ Life::LifeModel::LifeModel(int rows, int cols): desk(rows, cols)
   setEngine(Life::EngineType::common);
 }
 
-const Life::Desk &Life::LifeModel::readData()
+const Life::Desk &Life::LifeModel::readData() const
 {
   return desk;
 }
 
-const std::chrono::milliseconds& Life::LifeModel::readDelay()
+const std::chrono::milliseconds& Life::LifeModel::readDelay() const
 {
   return delay;
 }

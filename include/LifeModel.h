@@ -24,9 +24,9 @@ namespace Life {
 
     LifeModel(int rows, int cols);
 
-    const Desk& readData();
+    const Desk& readData() const;
 
-    const std::chrono::milliseconds& readDelay();
+    const std::chrono::milliseconds& readDelay() const;
 
     void run(std::function<void()> callBack = nullptr);
 
