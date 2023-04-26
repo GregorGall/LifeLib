@@ -1,5 +1,12 @@
 #include <Engines/ThreadEngine/ThreadEngine.h>
 
+Life::ThreadEngine::ThreadEngine(Desk &desk): LifeEngine(desk)
+{
+  if( desk.size() > 1000 ) { threadNum = std::thread::hardware_concurrency()/2; }
+  pull.resize(threadNum);
+  syncPoint.reset(threadNum);
+}
+
 void Life::ThreadEngine::process()
 {
   int tailNum = desk.size() % threadNum;

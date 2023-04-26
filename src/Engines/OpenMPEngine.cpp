@@ -1,5 +1,9 @@
 #include <Engines/OpenMPEngine.h>
 
+Life::OpenMPEngine::OpenMPEngine(Desk &desk): LifeEngine(desk)
+{
+}
+
 void Life::OpenMPEngine::process()
 {
   calculate();

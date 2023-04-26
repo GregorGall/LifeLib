@@ -5,12 +5,9 @@
 #include <chrono>
 #include <functional>
 
-#include "Desk.h"
-#include "Cell.h"
-#include "LifeEngine.h"
-#include "Engines/CommonEngine.h"
-#include "Engines/OpenMPEngine.h"
-#include "Engines/ThreadEngine/ThreadEngine.h"
+#include "CommonEngine.h"
+#include "OpenMPEngine.h"
+#include "ThreadEngine/ThreadEngine.h"
 
 namespace Life {
 
@@ -27,9 +24,9 @@ namespace Life {
 
     LifeModel(int rows, int cols);
 
-    const Desk& readData(){ return desk; }
+    const Desk& readData();
 
-    std::chrono::milliseconds readDelay(){ return delay; }
+    const std::chrono::milliseconds& readDelay();
 
     void run(std::function<void()> callBack = nullptr);
 
@@ -43,10 +40,10 @@ namespace Life {
 
     void resize(int rows, int cols);
 
-    void clear();
+    void clearDesk();
 
     template<class container>
-    void toggleGroup(container cellGroup )
+    void toggleGroup(const container& cellGroup )
     {
       std::lock_guard gaurd(dataMutex);
       for(auto& cell: cellGroup) {
@@ -60,7 +57,7 @@ namespace Life {
 
     std::mutex dataMutex;
 
-    std::unique_ptr<LifeEngine> engine;
+    std::unique_ptr<LifeEngine> engine{ nullptr };
 
     std::chrono::milliseconds delay{ 0 };
 

@@ -10,9 +10,7 @@ namespace Life {
 
   public:
 
-    OpenMPEngine(Desk& desk): LifeEngine(desk)
-    {
-    }
+    OpenMPEngine(Desk& desk);
 
     void process() override final;
 

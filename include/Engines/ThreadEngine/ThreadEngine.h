@@ -13,12 +13,7 @@ namespace Life {
 
   public:
 
-    ThreadEngine(Desk& desk): LifeEngine(desk)
-    {
-        if( desk.size() > 1000 ) { threadNum = std::thread::hardware_concurrency()/2; }
-        pull.resize(threadNum);
-        syncPoint.reset(threadNum);
-    }
+    ThreadEngine(Desk& desk);
 
     void process() override final;
 

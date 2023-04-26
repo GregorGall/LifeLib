@@ -7,23 +7,17 @@ namespace Life {
 
   public:
 
-    Cell(){}
+    void kill();
 
-    operator bool() const { return status; }
+    void renew();
 
-    void kill(){ status = false; }
+    bool toggle();
 
-    void renew(){ status = true; }
+    void evolute();
 
-    bool toggle(){ return status = !status; }
+    void increment();
 
-    void increment() { ++neighbours; }
-
-    void evolute()
-    {
-      if( neighbours != 2) { status = (neighbours == 3); }
-      neighbours = 0;
-    }
+    explicit operator bool() const;
 
   private:
 

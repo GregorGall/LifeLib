@@ -5,31 +5,9 @@ Life::Desk::Desk(int rows, int cols): m_rows{rows}, m_cols{cols}
   data = std::make_unique<Cell[]>(size());
 }
 
-Life::Desk::Desk(const Desk& other): m_rows{other.m_rows}, m_cols{other.m_cols}
+Life::Cell &Life::Desk::operator[](int index)
 {
-  data = std::make_unique<Cell[]>(size());
-  for(int i = 0; i < size(); ++i){
-//    data[i] = other.data[i];
-  }
-}
-
-Life::Desk& Life::Desk::operator=(const Desk& other)
-{
-  if(this == &other){ return *this; }
-
-  data = std::make_unique<Cell[]>(size());
-  for(int i = 0; i < size(); ++i){
-//    data[i] = other.data[i];
-  }
-
-  m_rows = other.m_rows;
-  m_cols = other.m_cols;
-  return *this;
-}
-
-const Life::Cell& Life::Desk::operator()(int row, int col) const
-{
-  return data[row*m_cols + col];
+  return data[index];
 }
 
 Life::Cell& Life::Desk::operator()(int row, int col)
@@ -37,6 +15,18 @@ Life::Cell& Life::Desk::operator()(int row, int col)
   return const_cast<Cell&>(
         static_cast<const Desk&>(*this).operator()(row, col)
   );
+}
+
+const Life::Cell& Life::Desk::operator()(int row, int col) const
+{
+  return data[row*m_cols + col];
+}
+
+void Life::Desk::clear()
+{
+  for(int i = 0; i < size(); ++i) {
+    data[i].kill();
+  }
 }
 
 void Life::Desk::resize(int rows, int cols)

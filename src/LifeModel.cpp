@@ -3,7 +3,17 @@
 
 Life::LifeModel::LifeModel(int rows, int cols): desk(rows, cols)
 {
-  setEngine(EngineType::common);
+  setEngine(Life::EngineType::common);
+}
+
+const Life::Desk &Life::LifeModel::readData()
+{
+  return desk;
+}
+
+const std::chrono::milliseconds& Life::LifeModel::readDelay()
+{
+  return delay;
 }
 
 void Life::LifeModel::setDelay(std::chrono::milliseconds input)
@@ -13,12 +23,17 @@ void Life::LifeModel::setDelay(std::chrono::milliseconds input)
   }
 }
 
-void Life::LifeModel::clear()
+void Life::LifeModel::resize(int rows, int cols)
+{
+  desk.resize(rows, cols);
+  engine->reset();
+}
+
+void Life::LifeModel::clearDesk()
 {
   std::lock_guard gaurd(dataMutex);
-  for(int i = 0; i < desk.size(); ++i) {
-    if(desk[i]) { engine->toggleCell(i); }
-  }
+  desk.clear();
+  engine->reset();
 }
 
 void Life::LifeModel::toggleCell(int row, int col)

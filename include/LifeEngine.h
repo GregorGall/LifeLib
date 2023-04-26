@@ -27,18 +27,15 @@ namespace Life {
 
   public:
 
-    LifeEngine(Desk& desk): desk{ desk }
-    {
-    }
+    LifeEngine(Desk& desk);
+
+    virtual ~LifeEngine() = default;
+
+    virtual void reset();
 
     virtual void process() = 0;
 
-    virtual void toggleCell(int row, int col) { desk(row, col).toggle(); }
-
-    // хорошо бы так
-    //virtual void toggleCell(int row, int col, bool) { desk(row, col).toggle(bool); }
-
-    void toggleCell(int i) { toggleCell( i/desk.cols(), i%desk.cols() ); }
+    virtual void toggleCell(int row, int col);
 
   protected:
 
