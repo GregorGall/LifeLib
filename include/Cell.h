@@ -3,6 +3,9 @@
 
 namespace Life {
 
+  const int lifeThreshold = 3;
+  const int minimumNeighboursToLive = 2;
+
   class Cell {
 
   public:
@@ -22,8 +25,6 @@ namespace Life {
   private:
 
     bool status{ false };
-
-  public:
 
     std::atomic_int neighbours{ 0 };
 

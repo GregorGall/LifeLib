@@ -8,12 +8,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Флаг сборки тестов
 option(TEST "Build tests" ON)
 message(STATUS "Build tests ${TEST}")
+enable_testing()
 
 # Подключение каталога с библиотекой
 add_subdirectory(src)
 
-# Подключение каталога с тестами
+# Подключение тестов
 if(TEST)
-  add_subdirectory(test)
+  find_package(GTest REQUIRED)
+  add_subdirectory(tests)
 endif()
 

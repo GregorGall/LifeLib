@@ -17,8 +17,8 @@ bool Life::Cell::toggle()
 
 void Life::Cell::evolute()
 {
-  if( neighbours != 2) {
-    status = (neighbours == 3);
+  if( neighbours != minimumNeighboursToLive) {
+    status = (neighbours == lifeThreshold);
   }
 
   neighbours = 0;
