@@ -10,4 +10,6 @@ AddThread(LifeLib)
 target_include_directories(LifeLib PUBLIC ${PROJECT_SOURCE_DIR}/include
                                           ${PROJECT_SOURCE_DIR}/include/Engines)
 # Сборка тестов
-add_subdirectory(tests)
+if(TEST)
+  add_subdirectory(tests)
+endif()
