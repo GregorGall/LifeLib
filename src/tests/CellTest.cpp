@@ -19,6 +19,19 @@ TEST(CellState, toggleState){
   EXPECT_EQ(bool(cell), false);
 }
 
+TEST(CellState, unexpectedReborn){
+  Life::Cell cell;
+  for(int i = 0; i < minimumNeighboursToComeALive; ++i) {
+    cell.increment();
+  }
+  cell.renew();
+  EXPECT_EQ(bool(cell), true);
+
+  cell.kill();
+  cell.evolute();
+  EXPECT_EQ(bool(cell), false);
+}
+
 TEST(CellLifeRules, comeAliveFromDust){
   Life::Cell cell;
   for(int i = 0; i < minimumNeighboursToComeALive; ++i) {
