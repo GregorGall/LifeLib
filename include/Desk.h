@@ -38,6 +38,7 @@ namespace Life {
 
     int m_cols{ 0 };
 
+    // А нафига я это сделал? Почему не вектор
     std::unique_ptr<Cell[]> data{ nullptr };
 
   };

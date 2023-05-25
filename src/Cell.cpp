@@ -3,6 +3,7 @@
 void Life::Cell::kill()
 {
   status = false;
+  neighbours.store(0);
 }
 
 void Life::Cell::renew()
@@ -21,7 +22,7 @@ void Life::Cell::evolute()
     status = (neighbours == lifeThreshold);
   }
 
-  neighbours = 0;
+  neighbours.store(0);
 }
 
 void Life::Cell::increment()

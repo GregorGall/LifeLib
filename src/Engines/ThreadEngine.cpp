@@ -2,6 +2,7 @@
 
 Life::ThreadEngine::ThreadEngine(Desk &desk): LifeEngine(desk)
 {
+  // проверку на 0 пожалуйста
   if( desk.size() > 1000 ) { threadNum = std::thread::hardware_concurrency()/2; }
   pull.resize(threadNum);
   syncPoint.reset(threadNum);
@@ -18,6 +19,7 @@ void Life::ThreadEngine::process()
     for(int i = 0; i < threadNum; ++i) { pull[i].join(); }
   }
 
+  // переделать в нормальный pull
   pull[0] = jthread(&ThreadEngine::partProcess, std::ref(*this), initPoint, endPoint);
   for(int i = 1; i < threadNum; ++i) {
     initPoint = endPoint;

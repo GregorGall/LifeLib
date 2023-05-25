@@ -22,7 +22,7 @@ namespace Life {
 
   public:
 
-    LifeModel(int rows, int cols);
+    explicit LifeModel(int rows = 0, int cols = 0);
 
     const Desk& readData() const;
 
