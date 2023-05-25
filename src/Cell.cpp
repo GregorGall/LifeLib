@@ -1,16 +1,29 @@
 #include "Cell.h"
 
+/*!
+ * \details
+ * Переключает клетку в состояние false и обнуляет число ее живых соседей.
+ * Обнуление соседей нужно для отсутствия спонтанного возраждения при вызове evolute.
+ */
 void Life::Cell::kill()
 {
   status = false;
   neighbours.store(0);
 }
 
+/*!
+ * \details
+ * Переключает клетку в состояние true
+ */
 void Life::Cell::renew()
 {
   status = true;
 }
 
+/*!
+ * \details
+ * Переключает текущее состояние и возвращает результат
+ */
 bool Life::Cell::toggle()
 {
   return status = !status;
@@ -34,11 +47,19 @@ void Life::Cell::evolute()
   neighbours.store(0);
 }
 
+/*!
+ * \details
+ * Потокобезопасный инкремент числа соседей
+ */
 void Life::Cell::increment()
 {
   ++neighbours;
 }
 
+/*!
+ * \details
+ * Для if и некоторых других случаев преобразование к bool объявленное как explicit не требует явного каста
+ */
 Life::Cell::operator bool() const
 {
   return status;
