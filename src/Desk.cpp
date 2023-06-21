@@ -1,15 +1,38 @@
 #include "Desk.h"
 
+/*!
+ * \details
+ * Инициализация размеров и выделение памяти
+ */
 Life::Desk::Desk(int rows, int cols): m_rows{rows}, m_cols{cols}
 {
   data = std::make_unique<Cell[]>(size());
 }
 
+/*!
+ * \details
+ * Просто линейный доступ по индексу
+ */
 Life::Cell &Life::Desk::operator[](int index)
 {
   return data[index];
 }
 
+/*!
+ * \details
+ * Доступ по константной ссылке по координатам
+ */
+const Life::Cell& Life::Desk::operator()(int row, int col) const
+{
+  return data[row*m_cols + col];
+}
+
+/*!
+ * \details
+ * Доступ по ссылке по координатам. Хотя обычно const_cast не является безопасным поведением
+ * в данном случае его использование возможно, т.к. вызов неконстантного метода и так подразумевает
+ * изменение ресурса. (Скотт Мэйерс 55 советов)
+ */
 Life::Cell& Life::Desk::operator()(int row, int col)
 {
   return const_cast<Cell&>(
@@ -17,11 +40,10 @@ Life::Cell& Life::Desk::operator()(int row, int col)
   );
 }
 
-const Life::Cell& Life::Desk::operator()(int row, int col) const
-{
-  return data[row*m_cols + col];
-}
-
+/*!
+ * \details
+ * Перевод всех клеток в неживое состояние
+ */
 void Life::Desk::clear()
 {
   for(int i = 0; i < size(); ++i) {
@@ -29,6 +51,10 @@ void Life::Desk::clear()
   }
 }
 
+/*!
+ * \details
+ * Изменение размеров поля выполняется с перевыделением памяти
+ */
 void Life::Desk::resize(int rows, int cols)
 {
   data = std::make_unique<Cell[]>(rows*cols);
@@ -36,12 +62,21 @@ void Life::Desk::resize(int rows, int cols)
   m_cols = cols;
 }
 
+/*!
+ * \details
+ * Перегрузка метода получения списка соседей для доступа по указателю.
+ * Т.к. матрица в памяти хранится построчно, то можно рассчитать сдвиг.
+ */
 std::list<Life::Cell*> Life::Desk::getNeighbours(Cell* cell)
 {
   int length = cell - data.get();
   return getNeighbours(length / m_cols, length % m_cols);
 }
 
+/*!
+ * \details
+ * Метод получения списка всех соседей клетки с координатами row, col
+ */
 std::list<Life::Cell*> Life::Desk::getNeighbours(int row, int col)
 {
 
