@@ -12,10 +12,3 @@ enable_testing()
 
 # Подключение каталога с библиотекой
 add_subdirectory(src)
-
-# Подключение тестов
-if(TEST)
-  find_package(GTest REQUIRED)
-  add_subdirectory(tests)
-endif()
-

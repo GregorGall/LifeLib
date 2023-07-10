@@ -12,6 +12,8 @@ public:
 
   int exec();
 
+  int testExec();
+
 private:
 
   void createSwarm(int rowNum, int colNum);

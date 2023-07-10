@@ -11,5 +11,6 @@ target_include_directories(LifeLib PUBLIC ${PROJECT_SOURCE_DIR}/include
                                           ${PROJECT_SOURCE_DIR}/include/Engines)
 # Сборка тестов
 if(TEST)
+  find_package(GTest REQUIRED)
   add_subdirectory(tests)
 endif()

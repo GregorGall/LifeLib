@@ -25,6 +25,21 @@ void Controller::launch()
   system("stty sane");
 }
 
+void Controller::testLaunch(int generationNum)
+{
+  auto counter = [&](){
+    static int generation = 0;
+    if(++generation >= generationNum){
+      model.stop();
+    }
+
+    view.show();
+  };
+
+  modelThread = std::thread(&Life::LifeModel::run, std::ref(model), counter);
+  modelThread.join();
+}
+
 void Controller::run()
 {
     view.toggleLife();

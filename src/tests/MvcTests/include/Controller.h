@@ -14,6 +14,8 @@ public:
 
   void launch();
 
+  void testLaunch(int generationNum);
+
   void createGlider(int row, int clmn);
 
 private:

@@ -8,3 +8,5 @@ target_link_libraries(LifeModelTest LifeLib gtest gtest_main)
 
 add_test(CellTestSuit CellTest)
 add_test(LifeModelTestSuit LifeModelTest)
+
+add_subdirectory(MvcTests)

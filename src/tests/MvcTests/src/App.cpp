@@ -16,3 +16,10 @@ int App::exec()
     ctrl.launch();
     return 0;
 }
+
+int App::testExec()
+{
+    createSwarm(2,3);
+    ctrl.testLaunch(100);
+    return 0;
+}

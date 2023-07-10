@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
 
-TEST(testCase, testName){
+TEST(LifeModel, baseTest){
   EXPECT_EQ(1,1);
 }
