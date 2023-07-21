@@ -12,7 +12,7 @@ void Life::OpenMPEngine::process()
 
 void Life::OpenMPEngine::calculate()
 {
-  #pragma omp parallel for if(desk.size() > 1000) num_threads(omp_get_max_threads()/2)
+  #pragma omp parallel for if(desk.size() > 1000) num_threads(omp_get_max_threads())
   for(int i = 0; i < desk.size(); ++i) {
       auto& cell = desk[i];
       if(cell) {
@@ -25,7 +25,7 @@ void Life::OpenMPEngine::calculate()
 
 void Life::OpenMPEngine::evolute()
 {
-  #pragma omp parallel for if(desk.size() > 1000) num_threads(omp_get_max_threads()/2)
+  #pragma omp parallel for if(desk.size() > 1000) num_threads(omp_get_max_threads())
   for(int i = 0; i < desk.size(); ++i) {
       desk[i].evolute();
   }

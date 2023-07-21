@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "barrier.h"
-#include "jthread.h"
+#include "ThreadPull.h"
 #include "LifeEngine.h"
 
 namespace Life {
@@ -27,9 +27,9 @@ namespace Life {
 
   private:
 
-    int threadNum{ 1 };
     barrier syncPoint;
-    std::vector<jthread> pull;
+    ThreadPull pull;
+    std::vector<std::future<void>> results;
 
   };
 

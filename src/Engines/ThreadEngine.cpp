@@ -2,30 +2,30 @@
 
 Life::ThreadEngine::ThreadEngine(Desk &desk): LifeEngine(desk)
 {
-  // проверку на 0 пожалуйста
-  if( desk.size() > 1000 ) { threadNum = std::thread::hardware_concurrency()/2; }
-  pull.resize(threadNum);
-  syncPoint.reset(threadNum);
+  syncPoint.reset(pull.size());
 }
 
 void Life::ThreadEngine::process()
 {
+  int threadNum = pull.size();
   int tailNum = desk.size() % threadNum;
   int blockNum = desk.size() / threadNum;
   int initPoint = 0;
   int endPoint = blockNum + tailNum;
 
-  if(pull[0].joinable()) {
-    for(int i = 0; i < threadNum; ++i) { pull[i].join(); }
-  }
-
-  // переделать в нормальный pull
-  pull[0] = jthread(&ThreadEngine::partProcess, std::ref(*this), initPoint, endPoint);
-  for(int i = 1; i < threadNum; ++i) {
+  for(int i = 0; i < threadNum; ++i) {
+    results.push_back(pull.addTask([this, initPoint, endPoint](){partProcess(initPoint, endPoint);}));
     initPoint = endPoint;
     endPoint += blockNum;
-    pull[i] = jthread(&ThreadEngine::partProcess, std::ref(*this), initPoint, endPoint);
   }
+
+  // Тут нужно дождать выполнения задач, не потоков
+  for(auto& taskReturn: results){
+    taskReturn.get();
+  }
+
+  results.clear();
+
 }
 
 void Life::ThreadEngine::partProcess(int initPoint, int endPoint)
