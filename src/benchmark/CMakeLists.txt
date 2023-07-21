@@ -1,0 +1,2 @@
+add_executable(EngineBenchMark EngineBenchMark.cpp)
+target_link_libraries(EngineBenchMark PRIVATE LifeLib benchmark benchmark_main)
