@@ -14,8 +14,8 @@ target_include_directories(LifeLib PUBLIC ${PROJECT_SOURCE_DIR}/include
 if(TEST)
 
 # Несовместимо с thread
-#  target_compile_options(LifeLib PRIVATE -fsanitize=address)
-#  target_link_options(LifeLib PUBLIC -fsanitize=address)
+  target_compile_options(LifeLib PRIVATE -fsanitize=address)
+  target_link_options(LifeLib PUBLIC -fsanitize=address)
 
 # Несовместимо с address
 #  target_compile_options(LifeLib PRIVATE -fsanitize=thread)

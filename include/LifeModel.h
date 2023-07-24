@@ -6,8 +6,14 @@
 #include <functional>
 
 #include "CommonEngine.h"
-#include "OpenMPEngine.h"
-#include "ThreadEngine/ThreadEngine.h"
+
+#ifndef NO_OPENMP
+  #include "OpenMPEngine.h"
+#endif
+
+#ifndef NO_THREAD
+  #include "ThreadEngine/ThreadEngine.h"
+#endif
 
 /*!
  *  \file

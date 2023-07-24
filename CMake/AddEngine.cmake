@@ -12,7 +12,7 @@ endfunction()
 
 # Функция добавляет в source файлы ThreadEngine.cpp
 function(AddThread target)
-  if(CMAKE_CXX_STANDARD GREATER 11)
+  if(CMAKE_CXX_STANDARD GREATER_EQUAL 17)
     message(STATUS "Use Thread engine TRUE")
     target_sources(${target} PRIVATE Engines/ThreadEngine.cpp)
   else()
