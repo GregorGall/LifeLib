@@ -1,2 +1,6 @@
 /build
+/doc/*
+/doc/!Doxyfile
+/doc/!mainpade.dox
 *.user
+*.bundle
