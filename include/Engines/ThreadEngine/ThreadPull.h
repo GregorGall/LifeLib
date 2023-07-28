@@ -8,57 +8,36 @@
 #include <future>
 #include <functional>
 
+#include "thrJoiner.h"
+
+/*!
+ *  \file
+ *  \brief Описание класса пул потоков
+ */
+
 namespace Life {
 
-  class join_threads {
-
-    std::vector<std::thread>& threads_;
-
-  public:
-
-    explicit join_threads(std::vector<std::thread>& threads): threads_(threads)
-    {
-    }
-
-    ~join_threads(){
-      for(unsigned long i=0; i < threads_.size(); ++i){
-        if(threads_[i].joinable()){
-          threads_[i].join();
-        }
-      }
-    }
-
-  };
-
+/*!
+ * \brief Пул потоков с ожиданием завершения задач
+ *
+ * Хранит вектор потоков исполняющих цикл по ожиданию и запуску задач.
+ * Особенность реализации в возврате future при добавлении задачи, что позволяет
+ * дожидаться ее завершения.
+ */
   class ThreadPull {
 
   public:
 
-    ThreadPull(): done(false), joiner(threads) {
+    /*! Конструктор */
+    ThreadPull();
 
-      size_t threadCount = std::thread::hardware_concurrency();
-      threadCount > 1 ? threadCount : threadCount = 1;
+    /*! Деструктор */
+    ~ThreadPull();
 
-      try {
-        for(size_t i = 0; i < threadCount; ++i){
-          threads.push_back(std::thread(&ThreadPull::exec, this));
-        }
-      }
-      catch(...){
-        done = true;
-        throw std::runtime_error("ThreadPull init failed");
-      }
+    /*! Количество потоков в пуле */
+    size_t size();
 
-    }
-
-    ~ThreadPull(){
-      done = true;
-    }
-
-    size_t size(){
-      return threads.size();
-    }
-
+    /*! Шаблон добавления задачи */
     template<typename T>
     std::future<void> addTask(T f){
 
@@ -72,36 +51,41 @@ namespace Life {
 
   private:
 
-    void exec() {
-
-      while(!done){
-        std::unique_lock lk(taskMutex);
-
-        if(!taskQueue.empty()){
-          auto task = std::move(taskQueue.front());
-          taskQueue.pop_front();
-          lk.unlock();
-
-          task();
-        }
-        else {
-          lk.unlock();
-          std::this_thread::yield();
-        }
-      }
-
-    }
+    /*! Метод по ожиданию и запуску выполняемый в потоке */
+    void exec();
 
   private:
 
+    /*! Тип принимаемой задачи */
     using task_t = void();
 
+    /*! Мьютекс для безопасного доступа к очереди задачи */
     std::mutex taskMutex;
+
+    /*! Флаг необходимости завершения потоков */
     std::atomic_bool done;
+
+    /*! Очередь задач на выполнение */
     std::deque<std::packaged_task<task_t>> taskQueue;
+
+    /*! Вектор потоков */
     std::vector<std::thread> threads;
-    join_threads joiner;
+
+    /*! Объект ожидания завершения вектора потоков
+     *
+     *  \details
+     *  По истечению времени жизни пула потоков первым уничтожается именно этот объект
+     *  (поэтому важен порядок расположения членов) в его деструкторе вызывается join для каждого потока
+     *  из вектора. Флаг done выставленный в значение true останавливает цикл и позволяет
+     *  завершиться методу exec. Объект удобен т.к. при провале запуска какого-либо потока и выбрасывании исключения нужно
+     *  дождаться завершения уже запущенных экзампляров.
+     *
+     *  \todo
+     *  Более практичным было бы использование jthreads, но нужна свежая версия компилятора.
+     */
+    thrJoiner joiner;
 
   };
+
 
 }
