@@ -1,6 +1,6 @@
 # LifeLib
 
-![Logo](/resource/Logo.png)
+![Logo](/doc/Logo.png)
 
 ## Описание
 
@@ -29,7 +29,7 @@
 
 По умолчанию вместе с тестами собирается консольное приложение MvcManualTest, которое демонстрирует основные возможности и ход игры:
 
-![ManualTest](/resource/ManualTest.png)
+![ManualTest](/doc/ManualTest.png)
 
 ### Правила
 
@@ -64,7 +64,7 @@
 Обе многопоточные реализации обрабатываю целиком все поле на каждой иттерации, в результате их преимущества заметны при плотном
 заполнении матрицы. В Thread реализации используется пул потоков, что позволяет не тратить время на их пересоздание. 
 
-![EngineBenchmark](/resource/EngineBenchmark.png)
+![EngineBenchmark](/doc/EngineBenchmark.png)
 
 Измерения представлены в порядке увеличения заполнения матрицы 1024x1024 фигурами типа stick(***).
 
@@ -83,6 +83,6 @@
 
     doxygen ./doc/Doxyfile
 
-![Doc](/resource/Doc.png)
+![Doc](/doc/Doc.png)
 
 

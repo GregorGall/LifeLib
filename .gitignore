@@ -1,6 +1,5 @@
 /build
-/doc/*
-/doc/!Doxyfile
-/doc/!mainpade.dox
+/doc/html
+/doc/latex
 *.user
 *.bundle

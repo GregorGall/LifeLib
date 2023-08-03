@@ -5,9 +5,10 @@ function(AddOpenMP target)
     target_sources(${target} PRIVATE Engines/OpenMPEngine.cpp)
     target_link_libraries(${target} PRIVATE "${OpenMP_CXX_FLAGS}")
     target_compile_options(${target} PRIVATE "${OpenMP_CXX_FLAGS}")
+  else()
+    target_compile_definitions(${target} PRIVATE "NO_OPENMP")
   endif()
   message(STATUS "Use OpenMP engine ${OpenMP_FOUND}")
-  target_compile_definitions(${target} PRIVATE "NO_OPENMP")
 endfunction()
 
 # Функция добавляет в source файлы ThreadEngine.cpp
