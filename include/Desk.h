@@ -33,7 +33,7 @@ namespace Life {
     const Cell& operator()(int row, int col) const;
 
     /*! Доступ к списку соседей */
-    std::list<Cell*> getNeighbours(Cell*);
+    std::list<Cell*> getNeighbours(Cell* cell);
 
     /*! Доступ к списку соседей */
     std::list<Cell*> getNeighbours(int row, int col);

@@ -26,12 +26,6 @@ namespace Life {
     /*! Конструктор */
     CommonEngine(Desk& desk);
 
-    /*! Добавить клетку в список живых */
-    void add(Cell* cell);
-
-    /*! Удалить клетку из списка живых */
-    void remove(Cell* cell);
-
     /*! Реинициализация */
     void reset() override final;
 
@@ -50,6 +44,12 @@ namespace Life {
 
     /*! Инициализация движка */
     void init();
+
+    /*! Добавить клетку в список живых */
+    void add(Cell* cell);
+
+    /*! Удалить клетку из списка живых */
+    void remove(Cell* cell);
 
     /*! Подсчет числа соседей */
     CellSet calculate();
