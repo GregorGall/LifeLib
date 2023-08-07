@@ -18,7 +18,7 @@ namespace Life {
   /*! Глайдер */
   cellGroup makeGlider(int row, int col);
 
-  /*! Вретикальный стик (***) */
+  /*! Вертикальный стик (***) */
   cellGroup makeStick(int row, int col);
 
   /*! Пруд */
