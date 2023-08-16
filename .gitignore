@@ -1,5 +1,6 @@
 /build
 /doc/html
 /doc/latex
+.DS_store
 *.user
 *.bundle
