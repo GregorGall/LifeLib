@@ -58,8 +58,8 @@ Cистемные требования:
 
 При сборке с флагом -std=c++17 требуется отключить сборку тестов и benchmark в корневом CMakeLists.txt:
 
-  option(TEST "Build tests" OFF)
-  option(BENCHMARK "Build benchmark" OFF)
+    option(TEST "Build tests" OFF)
+    option(BENCHMARK "Build benchmark" OFF)
   
 Сборка движка c OpenMP требует наличия соответствующей библиотеки, однако проект поддерживает условную компиляцию, при отсутствии
 необходимых компонент сборка будет продолжена с исключением модулей недоступных для компиляции.
