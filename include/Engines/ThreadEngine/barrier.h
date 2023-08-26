@@ -31,11 +31,18 @@ namespace Life {
       void wait()
       {
           std::unique_lock lk(syncMutex);
+          if(threadNum <= syncThread){
+              syncThread = 0;
+          }
 
           ++syncThread;
-          threadNum == syncThread ? wakeUp() : syncVar.wait(lk);
 
-          lk.unlock();
+          // C CondVar требуется использовать while как защиту от spurious wakeup
+          while(threadNum > syncThread){
+              syncVar.wait(lk);
+          }
+
+          wakeUp();
       }
 
       /*! Установка количества синхронизируемых потоков  */
@@ -47,7 +54,6 @@ namespace Life {
       void wakeUp()
       {
           syncVar.notify_all();
-          syncThread = 0;
       }
 
   private:

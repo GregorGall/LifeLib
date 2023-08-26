@@ -20,6 +20,6 @@ int App::exec()
 int App::testExec()
 {
     createSwarm(2,3);
-    ctrl.testLaunch(100);
+    ctrl.testLaunch(10);
     return 0;
 }
