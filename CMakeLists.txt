@@ -14,6 +14,7 @@ enable_testing()
 
 # Флаг сборки benchmark
 option(BENCHMARK "Build benchmark" ON)
+message(STATUS "Build benchmark ${BENCHMARK}")
 
 # Подключение каталога с библиотекой
 add_subdirectory(src)

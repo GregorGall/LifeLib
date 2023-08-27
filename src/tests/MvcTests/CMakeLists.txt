@@ -5,7 +5,7 @@ add_executable(MvcTest MvcTest.cpp ${MVC})
 target_include_directories(MvcTest PRIVATE include)
 target_link_libraries(MvcTest LifeLib gtest gtest_main)
 
-add_test(MvcTestSuit MVC)
+add_test(MvcTestSuit MvcTest)
 
 # Сборка консольного приложения Life для ручного тестирования
 add_executable(MvcManualTest MvcManualTest.cpp ${MVC})
