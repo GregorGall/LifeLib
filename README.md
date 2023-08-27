@@ -2,6 +2,9 @@
 
 ![Logo](/doc/Logo.png)
 
+[![LifeLib CI](https://github.com/GregorGall/LifeLib/actions/workflows/LifeLibCI.yml/badge.svg)](https://github.com/GregorGall/LifeLib/actions/workflows/LifeLibCI.yml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## Описание
 
 Статическая библиотека, реализующая модель "Жизни". Игра придумана английским математиком Джоном Конвеем в 1970 году. 
